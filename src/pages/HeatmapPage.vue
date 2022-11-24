@@ -55,9 +55,4 @@ const svgMap = map.getSVG({
   --map-dot-positive: #68c132;
   --map-default-dot: #c0c0c0;
 }
-
-.india {
-  --map-default-dot: var(--map-dot-positive);
-  stroke-width: 10px;
-}
 </style>
