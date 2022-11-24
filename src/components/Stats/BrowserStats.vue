@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { Browsers } from '../../types/browsers';
 import { PerformanceMetrics } from '../../types/metrics';
 import BROWSERS from '../../utils/browsers';
-import { formatUnit } from '../../utils/metrics';
+import { formatUnit, metricStatus } from '../../utils/metrics';
 
 const props = defineProps<{
   browser: Browsers;
@@ -12,6 +12,18 @@ const props = defineProps<{
     value: number;
   }[];
 }>();
+
+function computedScore(shortcode: PerformanceMetrics, value: number) {
+  const status = metricStatus(shortcode, value);
+
+  if (status === 'negative') {
+    return 'bg-red-200 text-red-800';
+  }
+
+  if (status === 'warning') {
+    return 'bg-orange-200 text-orange-800';
+  }
+}
 
 const currentBrowser = computed(() => {
   return BROWSERS[props.browser];
@@ -26,8 +38,12 @@ const currentBrowser = computed(() => {
       {{ currentBrowser.name }}
     </div>
     <div class="grid grid-cols-3 gap-2 col-span-2">
-      <div v-for="stat in stats" class="text-black-700">
-        {{ formatUnit(stat.shortcode, stat.value) }}
+      <div v-for="stat in stats" class="flex justify-end text-sm">
+        <div class="text-black-700 inline-flex text-right items-center gap-2 justify-end px-2 py-1 rounded-md"
+          :class="computedScore(stat.shortcode, stat.value)">
+          <div v-if="computedScore(stat.shortcode, stat.value)" class="w-2 h-2 rounded-full bg-current"></div>
+          {{ formatUnit(stat.shortcode, stat.value) }}
+        </div>
       </div>
     </div>
   </div>
