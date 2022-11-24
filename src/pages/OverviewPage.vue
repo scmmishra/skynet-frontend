@@ -24,7 +24,7 @@ const metricValues = [
   },
   {
     shortcode: PerformanceMetrics.CLS,
-    value: 0.4,
+    value: 0.15,
   },
   {
     shortcode: PerformanceMetrics.TBT,

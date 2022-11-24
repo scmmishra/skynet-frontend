@@ -22,16 +22,15 @@ export enum Percentile {
   p75 = "p75",
 }
 
+export type ThresholdParams = {
+  good: (value: number) => boolean;
+  poor: (value: number) => boolean;
+};
+
 export type MetricMetaData = {
   shortcode: PerformanceMetrics;
   title: string;
   description: string;
   unitFormat: (value: number) => string;
-  threshold?: Record<
-    Percentile,
-    {
-      good: (value: number) => boolean;
-      poor: (value: number) => boolean;
-    }
-  >;
+  threshold?: Record<Percentile, ThresholdParams>;
 };
