@@ -7,9 +7,11 @@ import AppSidebar from '@/components/Sidebar/AppSidebar.vue'
     <div>
       <AppSidebar class="sticky top-0 w-full"></AppSidebar>
     </div>
-    <Suspense>
-      <router-view />
-    </Suspense>
+    <div>
+      <Suspense>
+        <router-view />
+      </Suspense>
+    </div>
   </div>
 </template>
 
