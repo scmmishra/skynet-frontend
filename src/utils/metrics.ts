@@ -92,4 +92,16 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   },
 };
 
+export function percentageFromChange(change?: number) {
+  if (change) {
+    return `${Math.abs(change).toFixed(0)}%`;
+  }
+
+  return "";
+}
+
+export function formatUnit(shortcode: PerformanceMetrics, value: number) {
+  return METRICS[shortcode].unitFormat(value);
+}
+
 export default METRICS;

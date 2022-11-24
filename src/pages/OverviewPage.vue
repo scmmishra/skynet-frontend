@@ -4,6 +4,8 @@ import { PerformanceMetrics } from "../types/metrics";
 import StatCardVue from '../components/Stats/StatCard.vue';
 import CardVue from '../components/Base/Card.vue';
 import PaintMetricsChart from '../components/Stats/PaintMetricsChart.vue';
+import BrowserStats from '../components/Stats/BrowserStats.vue';
+import { Browsers } from '../types/browsers';
 
 const metricValues = [
   {
@@ -37,6 +39,38 @@ const metricValues = [
     value: 1900,
   },
 ]
+
+function getTestStat() {
+  return [
+    {
+      shortcode: PerformanceMetrics.FCP,
+      value: Math.round(1000 + (Math.random() * 100)),
+    },
+    {
+      shortcode: PerformanceMetrics.LCP,
+      value: Math.round(2000 + (Math.random() * 400)),
+    },
+    {
+      shortcode: PerformanceMetrics.CLS,
+      value: Math.random()
+    },
+  ]
+}
+
+const mobileBrowserStats = [
+  { browser: Browsers.BRAVE, stats: getTestStat() },
+  { browser: Browsers.CHROME, stats: getTestStat() },
+  { browser: Browsers.EDGE, stats: getTestStat() },
+  { browser: Browsers.FIREFOX, stats: getTestStat() },
+]
+
+const desktopBrowserStats = [
+  { browser: Browsers.BRAVE, stats: getTestStat() },
+  { browser: Browsers.SAFARI, stats: getTestStat() },
+  { browser: Browsers.CHROME, stats: getTestStat() },
+  { browser: Browsers.EDGE, stats: getTestStat() },
+  { browser: Browsers.FIREFOX, stats: getTestStat() },
+]
 </script>
 
 <template>
@@ -46,12 +80,40 @@ const metricValues = [
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <CardVue>
-      <div class="grid grid-cols-4 gap-8">
+      <div class="grid grid-cols-4 gap-8 p-6">
         <StatCardVue v-for="metric in metricValues" v-bind="metric" />
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
-      <PaintMetricsChart></PaintMetricsChart>
+      <PaintMetricsChart class="p-6" />
     </CardVue>
+    <div class="grid grid-cols-2 gap-6">
+      <CardVue class="py-6">
+        <div class="grid grid-cols-3 card-title mb-4 px-6">
+          <div class="col-span-1">
+            Browser
+          </div>
+          <div class="grid grid-cols-3 gap-2 col-span-2">
+            <div>FCP</div>
+            <div>LCP</div>
+            <div>CLS</div>
+          </div>
+        </div>
+        <BrowserStats v-for="stat in mobileBrowserStats" v-bind="stat" />
+      </CardVue>
+      <CardVue class="py-6">
+        <div class="grid grid-cols-3 card-title mb-4 px-6">
+          <div class="col-span-1">
+            Browser
+          </div>
+          <div class="grid grid-cols-3 gap-2 col-span-2">
+            <div>FCP</div>
+            <div>LCP</div>
+            <div>CLS</div>
+          </div>
+        </div>
+        <BrowserStats v-for="stat in desktopBrowserStats" v-bind="stat" />
+      </CardVue>
+    </div>
   </main>
 </template>

@@ -4,7 +4,7 @@ import { computed } from "vue";
 import type { BadgeTone } from '../../types/ui';
 import { Percentile, PerformanceMetrics } from "../../types/metrics";
 
-import METRICS from '../../utils/metrics'
+import METRICS, { percentageFromChange, formatUnit } from '../../utils/metrics'
 
 import { ArrowUpRight, ArrowDownRight } from "lucide-vue-next";
 import BadgeVue from "../Base/Badge.vue";
@@ -16,14 +16,8 @@ const props = defineProps<{
 }>()
 
 const title = computed(() => METRICS[props.shortcode].title);
-const formattedValue = computed(() => METRICS[props.shortcode].unitFormat(props.value));
-const formattedChange = computed(() => {
-  if (props.change) {
-    return `${Math.abs(props.change).toFixed(0)}%`
-  }
-
-  return ''
-});
+const formattedValue = computed(() => formatUnit(props.shortcode, props.value));
+const formattedChange = computed(() => percentageFromChange(props.change));
 
 function computedScore() {
   const threshold = METRICS[props.shortcode].threshold
