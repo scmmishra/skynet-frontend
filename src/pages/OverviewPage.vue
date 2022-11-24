@@ -11,71 +11,34 @@ import BrowserStatsTitleBar from '../components/Stats/BrowserStatsTitleBar.vue';
 import { Smartphone, Monitor } from 'lucide-vue-next';
 
 import api from '../utils/api';
+import { computed } from 'vue';
+import { DistributionResponse } from '../types/api';
 
-const metricValues = [
-  {
-    name: PerformanceMetrics.FCP,
-    value: 1013,
-    change: 12.5,
-  },
-  {
-    name: PerformanceMetrics.LCP,
-    value: 2050,
-    change: -2,
-  },
-  {
-    name: PerformanceMetrics.FP,
-    value: 120,
-  },
-  {
-    name: PerformanceMetrics.FID,
-    value: 6,
-  },
-  {
-    name: PerformanceMetrics.CLS,
-    value: 0.15,
-  },
-  {
-    name: PerformanceMetrics.TBT,
-    value: 300,
-  },
-  {
-    name: PerformanceMetrics.TTFB,
-    value: 1900,
-  },
-]
 
-function getTestStat() {
-  return [
-    {
-      name: PerformanceMetrics.FCP,
-      value: Math.round(1000 + (Math.random() * 100)),
-    },
-    {
-      name: PerformanceMetrics.LCP,
-      value: Math.round(2000 + (Math.random() * 600)),
-    },
-    {
-      name: PerformanceMetrics.CLS,
-      value: Math.random()
-    },
-  ]
+const allowedBrowserMetrics = [PerformanceMetrics.FCP, PerformanceMetrics.LCP, PerformanceMetrics.CLS];
+
+function marshallBrowserStats(stats: DistributionResponse) {
+  const keys = Object.keys(stats) as Browsers[]
+
+  return keys.map((key: Browsers) => {
+    return {
+      browser: key,
+      stats: mobileStats[key].filter((stat) => allowedBrowserMetrics.includes(stat.name))
+    }
+  })
 }
 
-const mobileBrowserStats = [
-  { browser: Browsers.BRAVE, stats: getTestStat() },
-  { browser: Browsers.CHROME, stats: getTestStat() },
-  { browser: Browsers.EDGE, stats: getTestStat() },
-  { browser: Browsers.FIREFOX, stats: getTestStat() },
-]
+const overview = await api.overview()
+const mobileStats = await api.mobileDistrubution()
+const desktopStats = await api.mobileDistrubution()
 
-const desktopBrowserStats = [
-  { browser: Browsers.BRAVE, stats: getTestStat() },
-  { browser: Browsers.SAFARI, stats: getTestStat() },
-  { browser: Browsers.CHROME, stats: getTestStat() },
-  { browser: Browsers.EDGE, stats: getTestStat() },
-  { browser: Browsers.FIREFOX, stats: getTestStat() },
-]
+const mobileBrowserStats = computed(() => {
+  return marshallBrowserStats(mobileStats)
+});
+
+const desktopBrowserStats = computed(() => {
+  return marshallBrowserStats(desktopStats)
+});
 </script>
 
 <template>
@@ -86,11 +49,11 @@ const desktopBrowserStats = [
     </section>
     <CardVue>
       <div class="grid grid-cols-4 gap-8 p-6">
-        <StatCardVue v-for="metric in metricValues" v-bind="metric" />
+        <StatCardVue v-for="metric in overview.metrics" v-bind="metric" />
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
-      <PaintMetricsChart class="p-6" />
+      <PaintMetricsChart class="p-6 pt-0" />
     </CardVue>
     <div class="grid grid-cols-2 gap-6">
       <CardVue class="pb-6" title="Mobile">
