@@ -9,7 +9,13 @@ export default defineConfig({
     vue(),
     VitePluginFonts({
       google: {
-        families: ["Inter"],
+        preconnect: true,
+        families: [
+          {
+            name: "Inter",
+            styles: "wght@400;500;600;700",
+          },
+        ],
       },
     }),
   ],
