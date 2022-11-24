@@ -80,7 +80,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
     learnMore: "https://web.dev/tbt/",
     shortcode: "TBT",
     description:
-      "the total amount of time your webpage was blocked, preventing the user from interacting with your page.",
+      "The total amount of time your webpage was blocked, preventing the user from interacting with your page.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
