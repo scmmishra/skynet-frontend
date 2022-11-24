@@ -58,10 +58,18 @@ const orgName = "DeepSource";
           >
             <TrendingUp class="w-4 h-4" />
           </SidebarItem>
-          <SidebarItem title="Heatmap" link="/heatmap">
+          <SidebarItem
+            title="Heatmap"
+            link="/heatmap"
+            :active="route.name === 'heatmap'"
+          >
             <Globe2 class="w-4 h-4" />
           </SidebarItem>
-          <SidebarItem title="Routes" link="/routes">
+          <SidebarItem
+            title="Routes"
+            link="/routes"
+            :active="route.name === 'routes'"
+          >
             <FileText class="w-4 h-4" />
           </SidebarItem>
           <SidebarItem title="Lighthouse" disabled badge-text="Soon">
