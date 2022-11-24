@@ -29,7 +29,7 @@ export function countDaysBackwards(numberOfDays: number): Array<string> {
       date.toDate().toLocaleDateString("en-US", {
         day: "2-digit",
         year: "numeric",
-        month: "long",
+        month: "short",
       })
     );
     date = dayjs(date).subtract(1, "day");

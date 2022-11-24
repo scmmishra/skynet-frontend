@@ -34,11 +34,16 @@ onMounted(() => {
     axisOptions: {
       xAxisMode: "tick",
       xIsSeries: true,
+      shortenYAxisNumbers: true,
       yAxisRange: {
         min: 0
       }
     },
-    colors: ["green", "light-blue"],
+    showLegend: false,
+    colors: ["#FFC382", "#ED810C"],
+    tooltipOptions: {
+      formatTooltipY: (d: number) => `${d} ms`,
+    }
   });
 })
 </script>
