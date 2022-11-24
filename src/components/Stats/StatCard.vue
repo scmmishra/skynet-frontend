@@ -2,9 +2,9 @@
 import { computed } from "vue";
 
 import type { BadgeTone } from '../../types/ui';
-import { Percentile, PerformanceMetrics } from "../../types/metrics";
+import { PerformanceMetrics } from "../../types/metrics";
 
-import METRICS, { percentageFromChange, formatUnit } from '../../utils/metrics'
+import METRICS, { percentageFromChange, formatUnit, metricStatus } from '../../utils/metrics'
 
 import { ArrowUpRight, ArrowDownRight } from "lucide-vue-next";
 import BadgeVue from "../Base/Badge.vue";
@@ -20,22 +20,18 @@ const formattedValue = computed(() => formatUnit(props.shortcode, props.value));
 const formattedChange = computed(() => percentageFromChange(props.change));
 
 function computedScore() {
-  const threshold = METRICS[props.shortcode].threshold
+  const status = metricStatus(props.shortcode, props.value);
 
-  if (threshold) {
-    const p75Thresholds = threshold[Percentile.p75]
-    const isGood = p75Thresholds.good(props.value)
-    const isPoor = p75Thresholds.poor(props.value)
+  if (status === 'positive') {
+    return 'bg-green-500';
+  }
 
-    if (isGood) {
-      return 'bg-green-500'
-    }
+  if (status === 'negative') {
+    return 'bg-red-500';
+  }
 
-    if (isPoor) {
-      return 'bg-red-500'
-    }
-
-    return 'bg-orange-500'
+  if (status === 'warning') {
+    return 'bg-orange-500';
   }
 
   return ''

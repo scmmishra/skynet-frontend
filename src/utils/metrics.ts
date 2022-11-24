@@ -3,6 +3,7 @@ import {
   Percentile,
   MetricMetaData,
 } from "../types/metrics";
+import { BadgeTone } from "../types/ui";
 
 const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.FP]: {
@@ -102,6 +103,31 @@ export function percentageFromChange(change?: number) {
 
 export function formatUnit(shortcode: PerformanceMetrics, value: number) {
   return METRICS[shortcode].unitFormat(value);
+}
+
+export function metricStatus(
+  shortcode: PerformanceMetrics,
+  value: number
+): BadgeTone {
+  const threshold = METRICS[shortcode].threshold;
+
+  if (threshold) {
+    const p75Thresholds = threshold[Percentile.p75];
+    const isGood = p75Thresholds.good(value);
+    const isPoor = p75Thresholds.poor(value);
+
+    if (isGood) {
+      return "positive";
+    }
+
+    if (isPoor) {
+      return "negative";
+    }
+
+    return "warning";
+  }
+
+  return "neutral";
 }
 
 export default METRICS;
