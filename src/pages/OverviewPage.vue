@@ -12,7 +12,6 @@ function formatValue(shortcode: PerformanceMetrics, value: number): string {
   return METRICS[shortcode].unitFormat(value);
 }
 
-
 const metricValues = [
   {
     shortcode: PerformanceMetrics.FCP,
@@ -37,6 +36,10 @@ const metricValues = [
   {
     shortcode: PerformanceMetrics.TBT,
     value: 300,
+  },
+  {
+    shortcode: PerformanceMetrics.TTFB,
+    value: 1900,
   },
 ]
 </script>
