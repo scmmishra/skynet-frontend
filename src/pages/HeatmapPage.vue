@@ -55,4 +55,19 @@ const svgMap = map.getSVG({
   --map-dot-positive: #68c132;
   --map-default-dot: #c0c0c0;
 }
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+circle[fill="#ff921b"],
+circle[fill="#ec5962"] {
+  animation: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
 </style>
