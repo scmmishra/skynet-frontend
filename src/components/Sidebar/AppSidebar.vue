@@ -28,7 +28,7 @@ const orgName = "DeepSource"
           <SidebarItem title="Metrics" badge-text="3" tone="negative">
             <TrendingUp class="w-4 h-4" />
           </SidebarItem>
-          <SidebarItem title="Archive">
+          <SidebarItem title="History" disabled badge-text="Coming Soon">
             <Archive class="w-4 h-4" />
           </SidebarItem>
         </SidebarGroup>
