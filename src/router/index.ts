@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import MetricsPage from "../pages/MetricsPage.vue";
 import OverviewPage from "../pages/OverviewPage.vue";
 
 const router = createRouter({
@@ -8,6 +9,11 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: OverviewPage,
+    },
+    {
+      path: "/metrics",
+      name: "metrics",
+      component: MetricsPage,
     },
   ],
 });
