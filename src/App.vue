@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import AppSidebar from '@/components/Sidebar/AppSidebar.vue'
+import ServerErrorVue from '@/components/Errors/ServerError.vue';
+import { ref, onErrorCaptured } from 'vue'
+const hasErrored = ref(false)
+
+onErrorCaptured(() => {
+  hasErrored.value = true
+})
 </script>
 
 <template>
@@ -9,7 +16,10 @@ import AppSidebar from '@/components/Sidebar/AppSidebar.vue'
     </div>
     <div>
       <Suspense>
-        <router-view />
+        <template #default>
+          <router-view v-if="!hasErrored" />
+          <ServerErrorVue v-else />
+        </template>
       </Suspense>
     </div>
   </div>
