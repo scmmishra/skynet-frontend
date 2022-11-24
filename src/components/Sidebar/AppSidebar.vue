@@ -12,7 +12,9 @@ const orgName = "DeepSource"
   <div class="flex flex-col h-screen p-3 pt-5 bg-white border-r border-gray-100 drop-shadow-sm">
     <div class="flex items-center justify-between p-2">
       <button class="flex items-center p-1 rounded-lg gap-x-2 hover:bg-gray-100">
-        <div class="w-6 h-6 rounded-lg bg-gradient-to-t from-indigo-400 to-indigo-200"></div>
+        <div class="w-6 h-6 rounded-lg bg-gradient-to-t bg-black-999 p-1">
+          <img src="/deepsource.svg" alt="DeepSource logo" />
+        </div>
         <span class="text-sm font-normal leading-none">{{ orgName }}</span>
       </button>
       <Avatar image="https://panoptic.in/files/sepia.jpeg" name="Shivam Mishra" has-badge class="m-1"></Avatar>
