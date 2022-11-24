@@ -96,14 +96,18 @@ const desktopBrowserStats = [
           <Smartphone class="h-4 w-4 text-black-700" />
         </template>
         <BrowserStatsTitleBar />
-        <BrowserStats v-for="stat in mobileBrowserStats" v-bind="stat" />
+        <BrowserStats v-for="(stat, index) in mobileBrowserStats" v-bind="stat" :class="{
+          'border-t border-black-200': index !== 0,
+        }" />
       </CardVue>
       <CardVue class="pb-6" title="Desktop">
         <template #title-icon>
           <Monitor class="h-4 w-4 text-black-700" />
         </template>
         <BrowserStatsTitleBar />
-        <BrowserStats v-for="stat in desktopBrowserStats" v-bind="stat" />
+        <BrowserStats v-for="(stat, index) in desktopBrowserStats" v-bind="stat" :class="{
+          'border-t border-black-200': index !== 0,
+        }" />
       </CardVue>
     </div>
   </main>
