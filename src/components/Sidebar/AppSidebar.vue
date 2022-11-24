@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Avatar from "./Avatar.vue";
+import Avatar from "../Avatar.vue";
 import { Settings, Gauge, Archive, TrendingUp, Library } from "lucide-vue-next";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarGroup from "./SidebarGroup.vue";
