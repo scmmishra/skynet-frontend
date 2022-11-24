@@ -17,11 +17,23 @@ function computedScore(name: PerformanceMetrics, value: number) {
   const status = metricStatus(name, value);
 
   if (status === 'negative') {
-    return 'bg-red-200 text-red-800';
+    return 'bg-red-500';
   }
 
   if (status === 'warning') {
-    return 'bg-orange-200 text-orange-800';
+    return 'bg-orange-500';
+  }
+
+  if (status === 'positive') {
+    return 'bg-green-500';
+  }
+}
+
+function textColor(name: PerformanceMetrics, value: number) {
+  const status = metricStatus(name, value);
+
+  if (status === 'negative') {
+    return 'text-red-500';
   }
 }
 
@@ -38,10 +50,11 @@ const currentBrowser = computed(() => {
       {{ currentBrowser.name }}
     </div>
     <div class="grid grid-cols-3 gap-2 col-span-2">
-      <div v-for="stat in stats" class="flex justify-end text-sm">
+      <div v-for="stat in stats" class="flex justify-end text-base">
         <div class="text-black-700 inline-flex text-right items-center gap-2 justify-end px-2 py-1 rounded-md"
-          :class="computedScore(stat.name, stat.value)">
-          <div v-if="computedScore(stat.name, stat.value)" class="w-2 h-2 rounded-full bg-current"></div>
+          :class="textColor(stat.name, stat.value)">
+          <div v-if="computedScore(stat.name, stat.value)" :class="computedScore(stat.name, stat.value)"
+            class="w-2 h-2 rounded-full" />
           {{ formatUnit(stat.name, stat.value) }}
         </div>
       </div>
