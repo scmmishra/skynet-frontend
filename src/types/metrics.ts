@@ -31,6 +31,7 @@ export type MetricMetaData = {
   name: PerformanceMetrics;
   shortcode: string;
   title: string;
+  learnMore?: string;
   description: string;
   unitFormat: (value: number) => string;
   threshold?: Record<Percentile, ThresholdParams>;

@@ -5,7 +5,7 @@ import { countDaysBackwards } from "../../utils/date";
 
 const props = defineProps<{
   trend: number[];
-  name: string;
+  title: string;
   color: string;
 }>();
 
@@ -18,7 +18,7 @@ onMounted(() => {
 
       datasets: [
         {
-          name: props.name,
+          name: props.title,
           values: props.trend,
         },
       ],

@@ -18,6 +18,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
     name: PerformanceMetrics.CLS,
     title: "Cumulative Layout Shift",
     shortcode: "CLS",
+    learnMore: "https://web.dev/cls/",
     description:
       "Sum of layout shift scores for every unexpected layout shift that occurs during the entire lifespan of the page.",
     unitFormat: (value) => value.toFixed(2),
@@ -32,6 +33,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
     name: PerformanceMetrics.FCP,
     title: "First Contentful Paint",
     shortcode: "FCP",
+    learnMore: "https://web.dev/fcp/",
     description:
       "This is the exact time taken for the browser to render the first bit of content from the DOM.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
@@ -45,6 +47,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.FID]: {
     name: PerformanceMetrics.FID,
     title: "First Input Delay",
+    learnMore: "https://web.dev/fid/",
     shortcode: "FID",
     description:
       "Response time of the browser to a user interaction with the page (clicking, tapping, etc).",
@@ -59,6 +62,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.LCP]: {
     name: PerformanceMetrics.LCP,
     title: "Largest Contentful Paint",
+    learnMore: "https://web.dev/lcp/",
     shortcode: "LCP",
     description:
       "Render time for the largest content element visible in the viewport.",
@@ -73,6 +77,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.TBT]: {
     name: PerformanceMetrics.TBT,
     title: "Total Blocking Time",
+    learnMore: "https://web.dev/tbt/",
     shortcode: "TBT",
     description:
       "the total amount of time your webpage was blocked, preventing the user from interacting with your page.",
@@ -87,6 +92,7 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.TTFB]: {
     name: PerformanceMetrics.TTFB,
     title: "Time to First Byte",
+    learnMore: "https://web.dev/ttfb/",
     shortcode: "TTFB",
     description:
       "Time taken by the browser to receive the first byte of the response from the server",
