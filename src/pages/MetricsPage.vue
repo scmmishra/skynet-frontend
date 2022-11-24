@@ -6,22 +6,19 @@ import {
   metricsColorsMap,
 } from "../types/metrics";
 
-// import api from "../utils/api";
+import api from "../utils/api";
 import { computed } from "vue";
 import Card from "../components/Base/Card.vue";
 import MetricsTrendChart from "../components/Stats/MetricsTrendChart.vue";
 import METRICS from "../utils/metrics";
 import { ArrowUpRight } from "lucide-vue-next";
-// const trendsFromApi = await api.trend();
+const trendsFromApi = await api.trend();
 
 function createTrend(name: PerformanceMetrics) {
-  const trend = Array.from({ length: 30 }, () =>
-    Math.floor(Math.random() * 30)
-  );
+  const trend = trendsFromApi[name];
   return {
     ...METRICS[name],
     trend,
-    // trend: trendsFromApi[name],
     lastValue: trend[trend.length - 1],
     color: metricsColorsMap[name] ?? "#1252F7",
   };
