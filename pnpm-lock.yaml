@@ -9,6 +9,7 @@ specifiers:
   frappe-charts: 2.0.0-rc23
   lucide-vue-next: ^0.102.0
   postcss: ^8.4.19
+  prettier: ^2.8.0
   tailwindcss: ^3.2.4
   typescript: ^4.6.4
   vite: ^3.2.3
@@ -30,6 +31,7 @@ devDependencies:
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
   autoprefixer: 10.4.13_postcss@8.4.19
   postcss: 8.4.19
+  prettier: 2.8.0
   tailwindcss: 3.2.4_postcss@8.4.19
   typescript: 4.9.3
   vite: 3.2.4_@types+node@18.11.9
@@ -864,6 +866,12 @@ packages:
       nanoid: 3.3.4
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
