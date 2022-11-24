@@ -20,3 +20,8 @@ export type RouteMetricsResponse = Record<
   PerformanceMetrics,
   { route: string; value: number }[]
 >;
+
+export type CountryStatsResponse = Record<
+  PerformanceMetrics,
+  { lat: number; long: number; metric: PerformanceMetrics; value: number }[]
+>;

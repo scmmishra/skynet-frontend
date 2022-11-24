@@ -1,36 +1,68 @@
-<script setup>
+<script setup lang="ts">
 import { formatDate } from "../utils/date";
 import Card from "../components/Base/Card.vue";
 import DottedMap from "dotted-map";
 import mapJson from "../utils/map";
+import api from "../utils/api";
+import { metricsOrder, PerformanceMetrics } from "../types/metrics";
+import METRICS, { metricStatus } from "../utils/metrics";
+import SidebarItem from "../components/Sidebar/SidebarItem.vue";
+import { onMounted, ref, Ref } from "vue";
 
-const map = new DottedMap({
-  map: mapJson,
-  height: 60,
-  grid: "diagonal",
+const countryStats = await api.heatmap();
+const sortedMetrics = Object.values(METRICS).sort(
+  (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
+);
+
+const selectedMetric: Ref<PerformanceMetrics> = ref(PerformanceMetrics.FCP);
+
+function getColor(name: PerformanceMetrics, value: number) {
+  const status = metricStatus(name, value);
+
+  if (status === "negative") return "#ec5962";
+  if (status === "positive") return "#68c132";
+  if (status === "warning") return "#ff921b";
+}
+
+let svgMap = ref("");
+
+function buildMap() {
+  const map = new DottedMap({
+    // @ts-ignore
+    map: mapJson,
+    height: 60,
+    grid: "diagonal",
+  });
+
+  const dataSource = countryStats[selectedMetric.value];
+
+  dataSource.forEach((item) => {
+    map.addPin({
+      lat: item.lat,
+      lng: item.long,
+      svgOptions: {
+        color: getColor(PerformanceMetrics.FCP, item.value),
+        radius: 1.2,
+      },
+    });
+  });
+
+  return map.getSVG({
+    radius: 0.22,
+    color: "#c0c0c0",
+    shape: "circle",
+    backgroundColor: "white",
+  });
+}
+
+onMounted(() => {
+  svgMap.value = buildMap();
 });
 
-map.addPin({
-  lat: 28.6,
-  lng: 78.962883,
-  svgOptions: {
-    color: "#ff921b",
-    radius: 0.8,
-  },
-});
-
-map.addPin({
-  lat: 48.8534,
-  lng: 2.3488,
-  svgOptions: { color: "#ec5962", radius: 0.8 },
-});
-
-const svgMap = map.getSVG({
-  radius: 0.22,
-  color: "#c0c0c0",
-  shape: "circle",
-  backgroundColor: "white",
-});
+function toggleMetric(metric: PerformanceMetrics) {
+  selectedMetric.value = metric;
+  svgMap.value = buildMap();
+}
 </script>
 
 <template>
@@ -41,20 +73,30 @@ const svgMap = map.getSVG({
       </h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
-
     <Card class="p-6">
-      <div v-html="svgMap"></div>
+      <div class="grid grid-cols-5 gap-8">
+        <div class="col-span-1 space-y-2">
+          <SidebarItem
+            v-for="metric in sortedMetrics"
+            :active="selectedMetric === metric.name"
+            :key="metric.name"
+            :title="metric.title"
+            @click="toggleMetric(metric.name)"
+          ></SidebarItem>
+        </div>
+        <div class="col-span-4" v-html="svgMap"></div>
+      </div>
     </Card>
   </main>
 </template>
 
 <style>
-:root {
+/* :root {
   --map-dot-negative: #ec5962;
   --map-dot-warning: #ff921b;
   --map-dot-positive: #68c132;
   --map-default-dot: #c0c0c0;
-}
+} */
 
 @keyframes pulse {
   0%,
@@ -62,7 +104,7 @@ const svgMap = map.getSVG({
     opacity: 1;
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.5;
   }
 }
 

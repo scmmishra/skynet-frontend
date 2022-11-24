@@ -3,6 +3,7 @@ import {
   OverviewResponse,
   TrendResponse,
   RouteMetricsResponse,
+  CountryStatsResponse,
 } from "../types/api";
 import { get } from "./request";
 
@@ -25,6 +26,10 @@ class API {
 
   async routeMetrics() {
     return await get<RouteMetricsResponse>("/stats/routes");
+  }
+
+  async heatmap() {
+    return await get<CountryStatsResponse>("/stats/countries");
   }
 }
 
