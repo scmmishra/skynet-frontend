@@ -40,7 +40,7 @@ const metricValues = [
 <template>
   <main class="grid py-8 pr-4 space-y-6">
     <section class="ml-2 space-y-2">
-      <h1 class="font-normal text-[24px] leading-8 text-black-999">Welcome back, Vishnu</h1>
+      <h1 class="font-normal text-[20px] leading-8 text-black-999">Welcome back, Vishnu</h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <section class="grid w-full grid-cols-4 gap-8 p-6 bg-white rounded-2xl card">

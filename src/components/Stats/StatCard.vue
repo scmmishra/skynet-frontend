@@ -66,8 +66,10 @@ const tagTone = computed(computedTone);
     </h5>
     <div class="flex items-center gap-x-5">
       <div class="flex items-center gap-2">
-        <div v-if="scoreAnnotation" class="h-2 w-2 rounded" :class="scoreAnnotation"></div>
-        <h3 class="font-medium text-[24px] leading-8 text-black-999">
+        <div v-if="scoreAnnotation" class="h-[10px] w-[10px] rounded grid place-content-center"
+          :class="scoreAnnotation">
+        </div>
+        <h3 class="font-medium text-[20px] leading-8 text-black-999">
           {{ formattedValue }}
         </h3>
       </div>
