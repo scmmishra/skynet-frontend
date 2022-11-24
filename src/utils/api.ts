@@ -1,4 +1,8 @@
-import { OverviewResponse } from "../types/api/overview";
+import {
+  DistributionResponse,
+  OverviewResponse,
+  TrendResponse,
+} from "../types/api/overview";
 import { get } from "./request";
 
 class API {
@@ -7,15 +11,15 @@ class API {
   }
 
   async trend() {
-    return await get<OverviewResponse>("/trends");
+    return await get<TrendResponse>("/trends");
   }
 
   async mobileDistrubution() {
-    return await get<OverviewResponse>("/stats/mobile");
+    return await get<DistributionResponse>("/stats/mobile");
   }
 
   async desktopDistrubution() {
-    return await get<OverviewResponse>("/stats/web");
+    return await get<DistributionResponse>("/stats/web");
   }
 }
 

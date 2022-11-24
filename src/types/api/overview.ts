@@ -1,9 +1,17 @@
+import { Browsers } from "../browsers";
 import { PerformanceMetrics } from "../metrics";
 
-export type OverviewResponse = {
-  metrics: {
-    name: PerformanceMetrics;
-    value: number;
-    change: number;
-  }[];
+export type MetricData = {
+  name: PerformanceMetrics;
+  value: number;
+  change: number;
+  is_positive: boolean;
 };
+
+export type OverviewResponse = {
+  metrics: MetricData[];
+};
+
+export type TrendResponse = Record<PerformanceMetrics, number[]>;
+
+export type DistributionResponse = Record<Browsers, MetricData[]>;
