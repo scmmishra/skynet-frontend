@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/vue": "^2.0.13",
     "dayjs": "^1.11.6",
+    "dotted-map": "^2.2.3",
     "frappe-charts": "2.0.0-rc23",
     "lucide-vue-next": "^0.102.0",
     "vue": "^3.2.41",

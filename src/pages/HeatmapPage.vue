@@ -1,7 +1,36 @@
-<script lang="ts" setup>
+<script setup>
 import { formatDate } from "../utils/date";
 import Card from "../components/Base/Card.vue";
-import MapTrends from "../components/Stats/MapTrends.vue";
+import DottedMap from "dotted-map";
+import mapJson from "../utils/map";
+
+const map = new DottedMap({
+  map: mapJson,
+  height: 60,
+  grid: "diagonal",
+});
+
+map.addPin({
+  lat: 28.6,
+  lng: 78.962883,
+  svgOptions: {
+    color: "#ff921b",
+    radius: 0.8,
+  },
+});
+
+map.addPin({
+  lat: 48.8534,
+  lng: 2.3488,
+  svgOptions: { color: "#ec5962", radius: 0.8 },
+});
+
+const svgMap = map.getSVG({
+  radius: 0.22,
+  color: "#c0c0c0",
+  shape: "circle",
+  backgroundColor: "white",
+});
 </script>
 
 <template>
@@ -14,7 +43,7 @@ import MapTrends from "../components/Stats/MapTrends.vue";
     </section>
 
     <Card class="p-6">
-      <MapTrends class="mx-auto" />
+      <div v-html="svgMap"></div>
     </Card>
   </main>
 </template>
