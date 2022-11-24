@@ -9,13 +9,13 @@
 // timeToFistByte: Time to First Byte is the time taken by the browser to receive the first byte of the response from the server
 
 export enum PerformanceMetrics {
-  FP = "firstPaint",
-  FCP = "firstContentfulPaint",
-  FID = "firstInputDelay",
-  LCP = "largestContentfulPaint",
-  CLS = "cumulativeLayoutShift",
-  TBT = "totalBlockingTime",
-  TTFB = "timeToFirstByte",
+  FP = "first_paint",
+  FCP = "first_contentful_paint",
+  FID = "first_input_delay",
+  LCP = "largest_contentful_paint",
+  CLS = "cumulative_layout_shift",
+  TBT = "total_blocking_time",
+  TTFB = "time_to_first_byte",
 }
 
 export enum Percentile {
