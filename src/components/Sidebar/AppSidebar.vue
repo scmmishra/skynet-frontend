@@ -2,7 +2,7 @@
 import { useRoute } from 'vue-router'
 
 import Avatar from "../Base/Avatar.vue";
-import { Settings, Gauge, LampFloor, TrendingUp, Library } from "lucide-vue-next";
+import { Settings, Gauge, LampFloor, TrendingUp, Library, FileText } from "lucide-vue-next";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarGroup from "./SidebarGroup.vue";
 
@@ -25,11 +25,14 @@ const orgName = "DeepSource"
     <div class="flex flex-col justify-between flex-grow py-5 space-y-8 overflow-y-auto">
       <div class="space-y-8">
         <SidebarGroup title="Insights">
-          <SidebarItem title="Overview" :active="route.name === 'home'">
+          <SidebarItem title="Overview" link="/" :active="route.name === 'home'">
             <Gauge class="w-4 h-4" />
           </SidebarItem>
-          <SidebarItem title="Metrics">
+          <SidebarItem title="Metrics" link="/metrics">
             <TrendingUp class="w-4 h-4" />
+          </SidebarItem>
+          <SidebarItem title="Routes" link="/routes">
+            <FileText class="w-4 h-4" />
           </SidebarItem>
           <SidebarItem title="Lighthouse" disabled badge-text="Soon">
             <LampFloor class="w-4 h-4" />
