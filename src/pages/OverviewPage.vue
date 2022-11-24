@@ -48,14 +48,14 @@ const desktopBrowserStats = computed(() => {
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <CardVue>
-      <div class="grid grid-cols-4 gap-8 p-6">
+      <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 p-6">
         <StatCardVue v-for="metric in overview.metrics" v-bind="metric" />
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
       <PaintMetricsChart class="p-6 pt-0" />
     </CardVue>
-    <div class="grid grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <CardVue class="pb-6" title="Mobile">
         <template #title-icon>
           <Smartphone class="h-4 w-4 text-black-700" />

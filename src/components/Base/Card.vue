@@ -7,11 +7,11 @@ defineProps<{
 <template>
   <section class="bg-white rounded-2xl card">
     <div v-if="title || $slots.controls" class="grid grid-cols-4 p-6">
-      <span class="col-span-1 text-base font-medium text-black-900 flex items-center gap-2">
+      <span class="col-span-full lg:col-span-1 text-base font-medium text-black-900 flex items-center gap-2">
         <slot name="title-icon"></slot>
         {{ title }}
       </span>
-      <div class="cols-span-3">
+      <div class="col-span-full lg:cols-span-3">
         <slot name="controls"></slot>
       </div>
     </div>
