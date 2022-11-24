@@ -7,6 +7,7 @@ const metricValues = [
   {
     shortcode: PerformanceMetrics.FCP,
     value: 1013,
+    change: 12.5,
   },
   {
     shortcode: PerformanceMetrics.LCP,
