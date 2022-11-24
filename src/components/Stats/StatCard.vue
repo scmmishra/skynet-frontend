@@ -48,7 +48,7 @@ const tagTone = computed(computedTone);
       <BadgeVue v-if="formattedChange" :tone="tagTone">
         <ArrowUpRight class="w-4 h-4" v-if="tagTone === 'negative'" />
         <ArrowDownRight class="w-4 h-4" v-else-if="tagTone === 'positive'" />
-        {{ formattedChange }}
+        <span class="tabular-nums">{{ formattedChange }}</span>
       </BadgeVue>
     </div>
   </div>
