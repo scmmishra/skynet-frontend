@@ -29,8 +29,25 @@ export type ThresholdParams = {
 
 export type MetricMetaData = {
   name: PerformanceMetrics;
+  shortcode: string;
   title: string;
   description: string;
   unitFormat: (value: number) => string;
   threshold?: Record<Percentile, ThresholdParams>;
 };
+
+export const allowedBrowserMetrics = [
+  PerformanceMetrics.FCP,
+  PerformanceMetrics.LCP,
+  PerformanceMetrics.CLS,
+];
+
+export const metricsOrder = [
+  PerformanceMetrics.FCP,
+  PerformanceMetrics.LCP,
+  PerformanceMetrics.CLS,
+  PerformanceMetrics.TTFB,
+  PerformanceMetrics.TBT,
+  PerformanceMetrics.FID,
+  PerformanceMetrics.FP,
+];

@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import { formatDate } from "../utils/date";
-import { PerformanceMetrics } from "../types/metrics";
+import {
+  PerformanceMetrics,
+  allowedBrowserMetrics,
+  metricsOrder,
+} from "../types/metrics";
 import StatCardVue from "../components/Stats/StatCard.vue";
 import CardVue from "../components/Base/Card.vue";
 import PaintMetricsChart from "../components/Stats/PaintMetricsChart.vue";
@@ -13,21 +17,6 @@ import { Smartphone, Monitor } from "lucide-vue-next";
 import api from "../utils/api";
 import { computed } from "vue";
 import { DistributionResponse } from "../types/api";
-
-const allowedBrowserMetrics = [
-  PerformanceMetrics.FCP,
-  PerformanceMetrics.LCP,
-  PerformanceMetrics.CLS,
-];
-const metricsOrder = [
-  PerformanceMetrics.FCP,
-  PerformanceMetrics.LCP,
-  PerformanceMetrics.CLS,
-  PerformanceMetrics.TTFB,
-  PerformanceMetrics.TBT,
-  PerformanceMetrics.FID,
-  PerformanceMetrics.FP,
-];
 
 function marshallBrowserStats(stats: DistributionResponse) {
   const keys = Object.keys(stats) as Browsers[];
@@ -71,24 +60,30 @@ const overviewMetrics = computed(() => {
   return overview.metrics.sort(
     (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
   );
-})
+});
 </script>
 
 <template>
   <main class="grid py-8 pr-4 space-y-6">
     <section class="ml-2 space-y-2">
       <h1 class="font-normal text-[20px] leading-8 text-black-999">
-        Welcome back, Vishnu
+        Overview, p75
       </h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <CardVue>
-      <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 p-6">
+      <div
+        class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 p-6"
+      >
         <StatCardVue v-for="metric in overviewMetrics" v-bind="metric" />
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
-      <PaintMetricsChart :fcp-trends="fcpTrends" :lcp-trends="lcpTrends" class="p-6 pt-0" />
+      <PaintMetricsChart
+        :fcp-trends="fcpTrends"
+        :lcp-trends="lcpTrends"
+        class="p-6 pt-0"
+      />
     </CardVue>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <CardVue class="pb-6" title="Mobile">
@@ -96,18 +91,26 @@ const overviewMetrics = computed(() => {
           <Smartphone class="h-4 w-4 text-black-700" />
         </template>
         <BrowserStatsTitleBar />
-        <BrowserStats v-for="(mobileStat, index) in mobileBrowserStats" v-bind="mobileStat" :class="{
-          'border-t border-black-200': index !== 0,
-        }" />
+        <BrowserStats
+          v-for="(mobileStat, index) in mobileBrowserStats"
+          v-bind="mobileStat"
+          :class="{
+            'border-t border-black-200': index !== 0,
+          }"
+        />
       </CardVue>
       <CardVue class="pb-6" title="Desktop">
         <template #title-icon>
           <Monitor class="h-4 w-4 text-black-700" />
         </template>
         <BrowserStatsTitleBar />
-        <BrowserStats v-for="(stat, index) in desktopBrowserStats" v-bind="stat" :class="{
-          'border-t border-black-200': index !== 0,
-        }" />
+        <BrowserStats
+          v-for="(stat, index) in desktopBrowserStats"
+          v-bind="stat"
+          :class="{
+            'border-t border-black-200': index !== 0,
+          }"
+        />
       </CardVue>
     </div>
   </main>
