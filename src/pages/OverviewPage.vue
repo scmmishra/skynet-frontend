@@ -6,6 +6,9 @@ import CardVue from '../components/Base/Card.vue';
 import PaintMetricsChart from '../components/Stats/PaintMetricsChart.vue';
 import BrowserStats from '../components/Stats/BrowserStats.vue';
 import { Browsers } from '../types/browsers';
+import BrowserStatsTitleBar from '../components/Stats/BrowserStatsTitleBar.vue';
+
+import { Smartphone, Monitor } from 'lucide-vue-next';
 
 const metricValues = [
   {
@@ -88,30 +91,18 @@ const desktopBrowserStats = [
       <PaintMetricsChart class="p-6" />
     </CardVue>
     <div class="grid grid-cols-2 gap-6">
-      <CardVue class="py-6">
-        <div class="grid grid-cols-3 card-title mb-4 px-6">
-          <div class="col-span-1">
-            Browser
-          </div>
-          <div class="grid grid-cols-3 gap-2 col-span-2">
-            <div>FCP</div>
-            <div>LCP</div>
-            <div>CLS</div>
-          </div>
-        </div>
+      <CardVue class="pb-6" title="Mobile">
+        <template #title-icon>
+          <Smartphone class="h-4 w-4 text-black-700" />
+        </template>
+        <BrowserStatsTitleBar />
         <BrowserStats v-for="stat in mobileBrowserStats" v-bind="stat" />
       </CardVue>
-      <CardVue class="py-6">
-        <div class="grid grid-cols-3 card-title mb-4 px-6">
-          <div class="col-span-1">
-            Browser
-          </div>
-          <div class="grid grid-cols-3 gap-2 col-span-2">
-            <div>FCP</div>
-            <div>LCP</div>
-            <div>CLS</div>
-          </div>
-        </div>
+      <CardVue class="pb-6" title="Desktop">
+        <template #title-icon>
+          <Monitor class="h-4 w-4 text-black-700" />
+        </template>
+        <BrowserStatsTitleBar />
         <BrowserStats v-for="stat in desktopBrowserStats" v-bind="stat" />
       </CardVue>
     </div>
