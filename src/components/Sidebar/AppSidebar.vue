@@ -23,7 +23,7 @@ const orgName = "DeepSource"
           <SidebarItem title="Overview">
             <Gauge class="w-4 h-4" />
           </SidebarItem>
-          <SidebarItem title="Metrics" badge-text="3" tone="danger">
+          <SidebarItem title="Metrics" badge-text="3" tone="negative">
             <TrendingUp class="w-4 h-4" />
           </SidebarItem>
           <SidebarItem title="Archive">

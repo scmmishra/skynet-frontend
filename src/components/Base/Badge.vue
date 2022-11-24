@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
+import type { BadgeTone } from '../../types/ui';
 
 export interface Props {
-  tone?: 'danger' | 'neutral' | 'primary'
+  tone?: BadgeTone
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -11,15 +12,19 @@ const props = withDefaults(defineProps<Props>(), {
 
 
 const toneState = computed(() => {
-  if (props.tone === 'primary') {
+  if (props.tone === 'positive') {
     return 'bg-green-100 text-green-600'
   }
 
-  if (props.tone === 'danger') {
+  if (props.tone === 'negative') {
     return 'bg-red-100 text-red-600'
   }
 
-  return 'bg-gray-100 text-gray-500'
+  if (props.tone === 'warning') {
+    return 'bg-orange-100 text-orange-600'
+  }
+
+  return 'bg-black-100 text-black-500'
 })
 </script>
 <template>
