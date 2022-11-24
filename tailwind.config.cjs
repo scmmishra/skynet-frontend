@@ -7,7 +7,7 @@ module.exports = {
     },
     extend: {
       gridTemplateColumns: {
-        "metrics-row": "200px minmax(900px, 1fr) 100px",
+        "metrics-row": "200px minmax(0px, 1fr)",
       },
       colors: {
         black: {

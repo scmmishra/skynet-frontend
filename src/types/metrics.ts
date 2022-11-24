@@ -51,3 +51,13 @@ export const metricsOrder = [
   PerformanceMetrics.FID,
   PerformanceMetrics.FP,
 ];
+
+export const metricsColorsMap = {
+  [PerformanceMetrics.FCP]: "#F87171",
+  [PerformanceMetrics.LCP]: "#FBBF24",
+  [PerformanceMetrics.CLS]: "#34D399",
+  [PerformanceMetrics.TTFB]: "#60A5FA",
+  [PerformanceMetrics.TBT]: "#A78BFA",
+  [PerformanceMetrics.FID]: "#DB2777",
+  [PerformanceMetrics.FP]: "#2563EB",
+};

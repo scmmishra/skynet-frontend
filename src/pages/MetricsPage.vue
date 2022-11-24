@@ -1,27 +1,24 @@
 <script lang="ts" setup>
 import { formatDate } from "../utils/date";
-import { PerformanceMetrics, metricsOrder } from "../types/metrics";
+import {
+  PerformanceMetrics,
+  metricsOrder,
+  metricsColorsMap,
+} from "../types/metrics";
 
-// import api from "../utils/api";
+import api from "../utils/api";
 import { computed } from "vue";
 import Card from "../components/Base/Card.vue";
+import MetricsTrendChart from "../components/Stats/MetricsTrendChart.vue";
 import METRICS from "../utils/metrics";
 
-// const trends = await api.trend();
-// const trends = {}
-
-// const fcpTrends = computed(() => {
-//   return trends[PerformanceMetrics.FCP] ?? [];
-// });
-
-// const lcpTrends = computed(() => {
-//   return trends[PerformanceMetrics.LCP] ?? [];
-// });
+const trendsFromApi = await api.trend();
 
 function createTrend(name: PerformanceMetrics, trend: number[]) {
   return {
     ...METRICS[name],
-    trend,
+    trend: trendsFromApi[name],
+    color: metricsColorsMap[name] ?? "#1252F7",
   };
 }
 
@@ -43,14 +40,16 @@ const trends = computed(() => {
 
     <Card class="p-6">
       <div
-        class="grid grid-cols-metrics-row border-b last:border-b-0 first:pt-0 last:pb-0 py-6"
+        class="grid grid-cols-metrics-row gap-8 border-b last:border-b-0 first:pt-0 last:pb-0 py-6"
         v-for="trend in trends"
       >
         <div class="space-y-2">
           <h2 class="text-lg">{{ trend.title }}</h2>
           <p class="text-black-600 text-sm">{{ trend.description }}</p>
         </div>
-        <div></div>
+        <div class="h-[300px]">
+          <MetricsTrendChart v-bind="trend" />
+        </div>
       </div>
     </Card>
   </main>

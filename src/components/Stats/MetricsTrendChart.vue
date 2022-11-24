@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { Chart } from "frappe-charts";
 import { ref, onMounted } from "vue";
-import { metricsColorsMap, PerformanceMetrics } from "../../types/metrics";
 import { countDaysBackwards } from "../../utils/date";
 
 const props = defineProps<{
-  lcpTrends: number[];
-  fcpTrends: number[];
+  trend: number[];
+  name: string;
+  color: string;
 }>();
 
 const chart = ref(null);
@@ -18,37 +18,20 @@ onMounted(() => {
 
       datasets: [
         {
-          name: "First Contentful Paint",
-          chartType: "line",
-          values: props.fcpTrends,
-        },
-        {
-          name: "Largest Contentful Paint",
-          chartType: "line",
-          values: props.lcpTrends,
+          name: props.name,
+          values: props.trend,
         },
       ],
     },
-
-    type: "axis-mixed",
+    type: "bar",
     height: 300,
-    lineOptions: {
-      spline: true,
-      trailingDot: true,
-    },
     axisOptions: {
       xAxisMode: "tick",
       xIsSeries: true,
       shortenYAxisNumbers: true,
-      yAxisRange: {
-        min: 0,
-      },
     },
     showLegend: false,
-    colors: [
-      metricsColorsMap[PerformanceMetrics.FCP],
-      metricsColorsMap[PerformanceMetrics.LCP],
-    ],
+    colors: [props.color],
     tooltipOptions: {
       formatTooltipY: (d: number) => `${d.toFixed(2)} ms`,
     },
