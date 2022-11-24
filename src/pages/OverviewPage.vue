@@ -51,7 +51,7 @@ function getTestStat() {
     },
     {
       shortcode: PerformanceMetrics.LCP,
-      value: Math.round(2000 + (Math.random() * 400)),
+      value: Math.round(2000 + (Math.random() * 600)),
     },
     {
       shortcode: PerformanceMetrics.CLS,
