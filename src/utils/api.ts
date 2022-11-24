@@ -2,6 +2,7 @@ import {
   DistributionResponse,
   OverviewResponse,
   TrendResponse,
+  RouteMetricsResponse,
 } from "../types/api";
 import { get } from "./request";
 
@@ -20,6 +21,10 @@ class API {
 
   async desktopDistrubution() {
     return await get<DistributionResponse>("/stats/web");
+  }
+
+  async routeMetrics() {
+    return await get<RouteMetricsResponse>("/stats/routes");
   }
 }
 

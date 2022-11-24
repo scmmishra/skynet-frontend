@@ -15,3 +15,8 @@ export type OverviewResponse = {
 export type TrendResponse = Record<PerformanceMetrics, number[]>;
 
 export type DistributionResponse = Record<Browsers, MetricData[]>;
+
+export type RouteMetricsResponse = Record<
+  PerformanceMetrics,
+  { route: string; value: number }[]
+>;
