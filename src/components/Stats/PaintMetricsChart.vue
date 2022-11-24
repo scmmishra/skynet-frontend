@@ -3,11 +3,15 @@ import { Chart } from "frappe-charts"
 import { ref, onMounted } from 'vue'
 import { countDaysBackwards } from "../../utils/date";
 
+const props = defineProps<{
+  lcpTrends: number[],
+  fcpTrends: number[]
+}>()
+
 const chart = ref(null);
 
 onMounted(() => {
   new Chart(chart.value, {
-    // or DOM element
     data: {
       labels: countDaysBackwards(30),
 
@@ -15,12 +19,12 @@ onMounted(() => {
         {
           name: "First Contentful Paint",
           chartType: "line",
-          values: Array.from({ length: 30 }, () => Math.floor(Math.random() * 100) + 1000)
+          values: props.fcpTrends
         },
         {
           name: "Largest Contentful Paint",
           chartType: "line",
-          values: Array.from({ length: 30 }, () => Math.floor(Math.random() * 200) + 2000)
+          values: props.lcpTrends
         }
       ]
     },
@@ -42,7 +46,7 @@ onMounted(() => {
     showLegend: false,
     colors: ["#FFC382", "#ED810C"],
     tooltipOptions: {
-      formatTooltipY: (d: number) => `${d} ms`,
+      formatTooltipY: (d: number) => `${d.toFixed(2)} ms`,
     }
   });
 })

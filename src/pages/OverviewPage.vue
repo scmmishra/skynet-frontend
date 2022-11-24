@@ -29,8 +29,17 @@ function marshallBrowserStats(stats: DistributionResponse) {
 }
 
 const overview = await api.overview()
+const trends = await api.trend()
 const mobileStats = await api.mobileDistrubution()
 const desktopStats = await api.mobileDistrubution()
+
+const fcpTrends = computed(() => {
+  return trends[PerformanceMetrics.FCP] ?? []
+})
+
+const lcpTrends = computed(() => {
+  return trends[PerformanceMetrics.LCP] ?? []
+})
 
 const mobileBrowserStats = computed(() => {
   return marshallBrowserStats(mobileStats)
@@ -53,7 +62,7 @@ const desktopBrowserStats = computed(() => {
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
-      <PaintMetricsChart class="p-6 pt-0" />
+      <PaintMetricsChart :fcp-trends="fcpTrends" :lcp-trends="lcpTrends" class="p-6 pt-0" />
     </CardVue>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <CardVue class="pb-6" title="Mobile">
