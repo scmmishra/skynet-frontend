@@ -9,7 +9,20 @@ import METRICS, { metricStatus } from "../utils/metrics";
 import SidebarItem from "../components/Sidebar/SidebarItem.vue";
 import { onMounted, ref, Ref } from "vue";
 
-const countryStats = await api.heatmap();
+let countryStats = await api.heatmap();
+let svgMap = ref("");
+
+const setIntervalAsync = (fn: () => Promise<void>, ms: number) => {
+  fn().then(() => {
+    setTimeout(() => setIntervalAsync(fn, ms), ms);
+  });
+};
+
+setIntervalAsync(async () => {
+  countryStats = await api.heatmap();
+  svgMap.value = buildMap();
+}, 5000);
+
 const sortedMetrics = Object.values(METRICS).sort(
   (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
 );
@@ -23,8 +36,6 @@ function getColor(name: PerformanceMetrics, value: number) {
   if (status === "positive") return "#68c132";
   if (status === "warning") return "#ff921b";
 }
-
-let svgMap = ref("");
 
 function buildMap() {
   const map = new DottedMap({
