@@ -9,15 +9,17 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.FP]: {
     name: PerformanceMetrics.FP,
     title: "First Paint",
+    shortcode: "FP",
     description:
-      "First Paint is the exact time taken for the browser to render anything as visually different from what was on the screen before navigation",
+      "This is the exact time taken for the browser to render anything as visually different from what was on the screen before navigation.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
   },
   [PerformanceMetrics.CLS]: {
     name: PerformanceMetrics.CLS,
     title: "Cumulative Layout Shift",
+    shortcode: "CLS",
     description:
-      "Cumulative Layout Shift is an important, user-centric metric for measuring visual stability because it helps quantify how often users experience unexpected layout shifts—a low CLS helps ensure that the page is delightful.",
+      "Sum of layout shift scores for every unexpected layout shift that occurs during the entire lifespan of the page.",
     unitFormat: (value) => value.toFixed(2),
     threshold: {
       [Percentile.p75]: {
@@ -29,8 +31,9 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.FCP]: {
     name: PerformanceMetrics.FCP,
     title: "First Contentful Paint",
+    shortcode: "FCP",
     description:
-      "First Contentful Paint is the exact time taken for the browser to render the first bit of content from the DOM",
+      "This is the exact time taken for the browser to render the first bit of content from the DOM.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
@@ -42,8 +45,9 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.FID]: {
     name: PerformanceMetrics.FID,
     title: "First Input Delay",
+    shortcode: "FID",
     description:
-      "First Input Delay measures the time from when a user first interacts with your site, to the time when the browser is actually able to respond to that interaction.",
+      "Response time of the browser to a user interaction with the page (clicking, tapping, etc).",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
@@ -55,8 +59,9 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.LCP]: {
     name: PerformanceMetrics.LCP,
     title: "Largest Contentful Paint",
+    shortcode: "LCP",
     description:
-      "Large Contentful Paint is an important, user-centric metric for measuring perceived load speed because it marks the point in the page load timeline when the page's main content has likely loaded",
+      "Render time for the largest content element visible in the viewport.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
@@ -68,8 +73,9 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.TBT]: {
     name: PerformanceMetrics.TBT,
     title: "Total Blocking Time",
+    shortcode: "TBT",
     description:
-      "Total Blocking Time measures the total amount of time between First Contentful Paint and Time to Interactive where the main thread was blocked for long enough to prevent input responsiveness.",
+      "the total amount of time your webpage was blocked, preventing the user from interacting with your page.",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
@@ -81,8 +87,9 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
   [PerformanceMetrics.TTFB]: {
     name: PerformanceMetrics.TTFB,
     title: "Time to First Byte",
+    shortcode: "TTFB",
     description:
-      "Time to First Byte is the time taken by the browser to receive the first byte of the response from the server",
+      "Time taken by the browser to receive the first byte of the response from the server",
     unitFormat: (value) => `${value.toFixed(0)}ms`,
     threshold: {
       [Percentile.p75]: {
