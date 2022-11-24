@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { formatDate } from '../utils/date';
-import {
-  PerformanceMetrics,
-} from "../types/metrics";
+import { PerformanceMetrics } from "../types/metrics";
 
 import METRICS from '../utils/metrics'
 
