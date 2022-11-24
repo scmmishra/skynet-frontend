@@ -1,16 +1,7 @@
 <script lang="ts" setup>
 import { formatDate } from '../utils/date';
 import { PerformanceMetrics } from "../types/metrics";
-
-import METRICS from '../utils/metrics'
-
-function getTitle(shortcode: PerformanceMetrics): string {
-  return METRICS[shortcode].title;
-}
-
-function formatValue(shortcode: PerformanceMetrics, value: number): string {
-  return METRICS[shortcode].unitFormat(value);
-}
+import StatCardVue from '../components/Stats/StatCard.vue';
 
 const metricValues = [
   {
@@ -51,14 +42,7 @@ const metricValues = [
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <section class="grid w-full grid-cols-4 gap-8 p-6 bg-white rounded-2xl card">
-      <div v-for="metric in metricValues" class="space-y-1">
-        <h5 class="text-sm font-normal leading-6 text-black-600">
-          {{ getTitle(metric.shortcode) }}
-        </h5>
-        <h3 class="font-medium text-[24px] leading-8 text-black-999">
-          {{ formatValue(metric.shortcode, metric.value) }}
-        </h3>
-      </div>
+      <StatCardVue v-for="metric in metricValues" v-bind="metric" />
     </section>
   </main>
 </template>
