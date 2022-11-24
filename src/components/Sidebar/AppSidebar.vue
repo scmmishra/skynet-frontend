@@ -9,6 +9,7 @@ import {
   TrendingUp,
   Library,
   FileText,
+  Globe2,
 } from "lucide-vue-next";
 import SidebarItem from "./SidebarItem.vue";
 import SidebarGroup from "./SidebarGroup.vue";
@@ -56,6 +57,9 @@ const orgName = "DeepSource";
             :active="route.name === 'metrics'"
           >
             <TrendingUp class="w-4 h-4" />
+          </SidebarItem>
+          <SidebarItem title="Heatmap" link="/heatmap">
+            <Globe2 class="w-4 h-4" />
           </SidebarItem>
           <SidebarItem title="Routes" link="/routes">
             <FileText class="w-4 h-4" />

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import LearnPage from "../pages/LearnPage.vue";
 import MetricsPage from "../pages/MetricsPage.vue";
 import OverviewPage from "../pages/OverviewPage.vue";
+import HeatmapPage from "../pages/HeatmapPage.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/learn",
       name: "learn",
       component: LearnPage,
+    },
+    {
+      path: "/heatmap",
+      name: "heatmap",
+      component: HeatmapPage,
     },
   ],
 });
