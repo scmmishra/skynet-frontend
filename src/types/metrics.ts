@@ -6,6 +6,7 @@
 // largestContentfulPaint: Largest Contentful Paint is an important, user-centric metric for measuring perceived load speed because it marks the point in the page load timeline when the page's main content has likely loaded
 // cumulativeLayoutShift: Cumulative Layout Shift is an important, user-centric metric for measuring visual stability because it helps quantify how often users experience unexpected layout shifts—a low CLS helps ensure that the page is delightful.
 // totalBlockingTime: Measures the total amount of time between First Contentful Paint and Time to Interactive where the main thread was blocked for long enough to prevent input responsiveness.
+// timeToFistByte: Time to First Byte is the time taken by the browser to receive the first byte of the response from the server
 
 export enum PerformanceMetrics {
   FP = "firstPaint",
@@ -14,6 +15,7 @@ export enum PerformanceMetrics {
   LCP = "largestContentfulPaint",
   CLS = "cumulativeLayoutShift",
   TBT = "totalBlockingTime",
+  TTFB = "timeToFirstByte",
 }
 
 export enum Percentile {

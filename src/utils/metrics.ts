@@ -77,6 +77,19 @@ const METRICS: Record<PerformanceMetrics, MetricMetaData> = {
       },
     },
   },
+  [PerformanceMetrics.TTFB]: {
+    shortcode: PerformanceMetrics.TTFB,
+    title: "Time to First Byte",
+    description:
+      "Time to First Byte is the time taken by the browser to receive the first byte of the response from the server",
+    unitFormat: (value) => `${value}ms`,
+    threshold: {
+      [Percentile.p75]: {
+        good: (value) => value <= 800,
+        poor: (value) => value >= 1800,
+      },
+    },
+  },
 };
 
 export default METRICS;
