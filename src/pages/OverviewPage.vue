@@ -43,7 +43,7 @@ const metricValues = [
 
 <template>
   <main class="grid py-8 pr-4 space-y-6">
-    <section class="space-y-2">
+    <section class="ml-2 space-y-2">
       <h1 class="font-normal text-[24px] leading-8 text-black-999">Welcome back, Vishnu</h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
