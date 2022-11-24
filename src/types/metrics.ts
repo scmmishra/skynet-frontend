@@ -28,7 +28,7 @@ export type ThresholdParams = {
 };
 
 export type MetricMetaData = {
-  shortcode: PerformanceMetrics;
+  name: PerformanceMetrics;
   title: string;
   description: string;
   unitFormat: (value: number) => string;

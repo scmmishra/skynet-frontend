@@ -12,37 +12,37 @@ const browserImages = {
 
 const BROWSERS: Record<Browsers, BrowserMetaData> = {
   [Browsers.BRAVE]: {
-    shortcode: Browsers.BRAVE,
+    name: Browsers.BRAVE,
     name: "Brave",
     image: "/browsers/brave.png",
   },
   [Browsers.CHROME]: {
-    shortcode: Browsers.CHROME,
+    name: Browsers.CHROME,
     name: "Chrome",
     image: "/browsers/chrome.png",
   },
   [Browsers.EDGE]: {
-    shortcode: Browsers.EDGE,
+    name: Browsers.EDGE,
     name: "Edge",
     image: "/browsers/edge.png",
   },
   [Browsers.FIREFOX]: {
-    shortcode: Browsers.FIREFOX,
+    name: Browsers.FIREFOX,
     name: "Firefox",
     image: "/browsers/firefox.png",
   },
   [Browsers.OPERA]: {
-    shortcode: Browsers.OPERA,
+    name: Browsers.OPERA,
     name: "Opera",
     image: "/browsers/opera.png",
   },
   [Browsers.SAFARI]: {
-    shortcode: Browsers.SAFARI,
+    name: Browsers.SAFARI,
     name: "Safari",
     image: "/browsers/safari.png",
   },
   [Browsers.SAMSUNG]: {
-    shortcode: Browsers.SAMSUNG,
+    name: Browsers.SAMSUNG,
     name: "Samsung",
     image: "/browsers/samsung.png",
   },

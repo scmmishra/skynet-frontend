@@ -10,35 +10,37 @@ import BrowserStatsTitleBar from '../components/Stats/BrowserStatsTitleBar.vue';
 
 import { Smartphone, Monitor } from 'lucide-vue-next';
 
+import api from '../utils/api';
+
 const metricValues = [
   {
-    shortcode: PerformanceMetrics.FCP,
+    name: PerformanceMetrics.FCP,
     value: 1013,
     change: 12.5,
   },
   {
-    shortcode: PerformanceMetrics.LCP,
+    name: PerformanceMetrics.LCP,
     value: 2050,
     change: -2,
   },
   {
-    shortcode: PerformanceMetrics.FP,
+    name: PerformanceMetrics.FP,
     value: 120,
   },
   {
-    shortcode: PerformanceMetrics.FID,
+    name: PerformanceMetrics.FID,
     value: 6,
   },
   {
-    shortcode: PerformanceMetrics.CLS,
+    name: PerformanceMetrics.CLS,
     value: 0.15,
   },
   {
-    shortcode: PerformanceMetrics.TBT,
+    name: PerformanceMetrics.TBT,
     value: 300,
   },
   {
-    shortcode: PerformanceMetrics.TTFB,
+    name: PerformanceMetrics.TTFB,
     value: 1900,
   },
 ]
@@ -46,15 +48,15 @@ const metricValues = [
 function getTestStat() {
   return [
     {
-      shortcode: PerformanceMetrics.FCP,
+      name: PerformanceMetrics.FCP,
       value: Math.round(1000 + (Math.random() * 100)),
     },
     {
-      shortcode: PerformanceMetrics.LCP,
+      name: PerformanceMetrics.LCP,
       value: Math.round(2000 + (Math.random() * 600)),
     },
     {
-      shortcode: PerformanceMetrics.CLS,
+      name: PerformanceMetrics.CLS,
       value: Math.random()
     },
   ]

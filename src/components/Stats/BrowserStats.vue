@@ -8,13 +8,13 @@ import { formatUnit, metricStatus } from '../../utils/metrics';
 const props = defineProps<{
   browser: Browsers;
   stats: {
-    shortcode: PerformanceMetrics;
+    name: PerformanceMetrics;
     value: number;
   }[];
 }>();
 
-function computedScore(shortcode: PerformanceMetrics, value: number) {
-  const status = metricStatus(shortcode, value);
+function computedScore(name: PerformanceMetrics, value: number) {
+  const status = metricStatus(name, value);
 
   if (status === 'negative') {
     return 'bg-red-200 text-red-800';
@@ -40,9 +40,9 @@ const currentBrowser = computed(() => {
     <div class="grid grid-cols-3 gap-2 col-span-2">
       <div v-for="stat in stats" class="flex justify-end text-sm">
         <div class="text-black-700 inline-flex text-right items-center gap-2 justify-end px-2 py-1 rounded-md"
-          :class="computedScore(stat.shortcode, stat.value)">
-          <div v-if="computedScore(stat.shortcode, stat.value)" class="w-2 h-2 rounded-full bg-current"></div>
-          {{ formatUnit(stat.shortcode, stat.value) }}
+          :class="computedScore(stat.name, stat.value)">
+          <div v-if="computedScore(stat.name, stat.value)" class="w-2 h-2 rounded-full bg-current"></div>
+          {{ formatUnit(stat.name, stat.value) }}
         </div>
       </div>
     </div>

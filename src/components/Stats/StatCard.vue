@@ -10,17 +10,17 @@ import { ArrowUpRight, ArrowDownRight } from "lucide-vue-next";
 import BadgeVue from "../Base/Badge.vue";
 
 const props = defineProps<{
-  shortcode: PerformanceMetrics;
+  name: PerformanceMetrics;
   value: number;
   change?: number;
 }>()
 
-const title = computed(() => METRICS[props.shortcode].title);
-const formattedValue = computed(() => formatUnit(props.shortcode, props.value));
+const title = computed(() => METRICS[props.name].title);
+const formattedValue = computed(() => formatUnit(props.name, props.value));
 const formattedChange = computed(() => percentageFromChange(props.change));
 
 function computedScore() {
-  const status = metricStatus(props.shortcode, props.value);
+  const status = metricStatus(props.name, props.value);
 
   if (status === 'positive') {
     return 'bg-green-500';
