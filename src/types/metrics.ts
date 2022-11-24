@@ -13,7 +13,7 @@ export enum PerformanceMetrics {
   FCP = "first_contentful_paint",
   FID = "first_input_delay",
   LCP = "largest_contentful_paint",
-  CLS = "cumulative_layout_shift",
+  CLS = "cumu_layout_shift",
   TBT = "total_blocking_time",
   TTFB = "time_to_first_byte",
 }
