@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@heroicons/vue': ^2.0.13
+  '@tailwindcss/typography': ^0.5.8
   '@types/node': ^18.11.9
   '@vitejs/plugin-vue': ^3.2.0
   autoprefixer: ^10.4.13
@@ -27,6 +28,7 @@ dependencies:
   vue-router: 4.1.6_vue@3.2.45
 
 devDependencies:
+  '@tailwindcss/typography': 0.5.8_tailwindcss@3.2.4
   '@types/node': 18.11.9
   '@vitejs/plugin-vue': 3.2.0_vite@3.2.4+vue@3.2.45
   autoprefixer: 10.4.13_postcss@8.4.19
@@ -108,6 +110,18 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@tailwindcss/typography/0.5.8_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-xGQEp8KXN8Sd8m6R4xYmwxghmswrd0cPnNI2Lc6fmrC3OojysTBJJGSIVwPV56q4t6THFUK3HJ0EaWwpglSxWw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 3.2.4_postcss@8.4.19
     dev: true
 
   /@types/node/18.11.9:
@@ -716,6 +730,18 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /lodash.castarray/4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
+  /lodash.isplainobject/4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: true
+
+  /lodash.merge/4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
+    dev: true
+
   /lucide-vue-next/0.102.0_vue@3.2.45:
     resolution: {integrity: sha512-MSLyEOz0bdGVxtrM8LYHL29KalKLHrlpGgkZ04Jum9w0LtIxjYWd9SiYAOzcxt2X6toWBhgev1H+59pdJ9n4Xg==}
     peerDependencies:
@@ -845,6 +871,14 @@ packages:
     dependencies:
       postcss: 8.4.19
       postcss-selector-parser: 6.0.11
+    dev: true
+
+  /postcss-selector-parser/6.0.10:
+    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+    engines: {node: '>=4'}
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
     dev: true
 
   /postcss-selector-parser/6.0.11:

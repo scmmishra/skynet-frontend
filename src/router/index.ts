@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import LearnPage from "../pages/LearnPage.vue";
 import MetricsPage from "../pages/MetricsPage.vue";
 import OverviewPage from "../pages/OverviewPage.vue";
 
@@ -14,6 +15,11 @@ const router = createRouter({
       path: "/metrics",
       name: "metrics",
       component: MetricsPage,
+    },
+    {
+      path: "/learn",
+      name: "learn",
+      component: LearnPage,
     },
   ],
 });

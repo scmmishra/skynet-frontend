@@ -69,7 +69,7 @@ const orgName = "DeepSource";
         <SidebarItem title="Settings" link="/settings">
           <Settings class="w-4 h-4" />
         </SidebarItem>
-        <SidebarItem title="Learn" badge-text="Coming Soon">
+        <SidebarItem title="Learn" link="learn">
           <Library class="w-4 h-4" />
         </SidebarItem>
       </SidebarGroup>
