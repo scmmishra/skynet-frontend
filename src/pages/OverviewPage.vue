@@ -35,7 +35,7 @@ function marshallBrowserStats(stats: DistributionResponse) {
   return keys.map((key: Browsers) => {
     return {
       browser: key,
-      stats: mobileStats[key]
+      stats: stats[key]
         .filter((stat) => allowedBrowserMetrics.includes(stat.name))
         .sort(
           (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
@@ -44,10 +44,12 @@ function marshallBrowserStats(stats: DistributionResponse) {
   });
 }
 
-const overview = await api.overview();
-const trends = await api.trend();
-const mobileStats = await api.mobileDistrubution();
-const desktopStats = await api.mobileDistrubution();
+const [overview, trends, mobileStats, desktopStats] = await Promise.all([
+  api.overview(),
+  api.trend(),
+  api.mobileDistrubution(),
+  api.desktopDistrubution(),
+]);
 
 const fcpTrends = computed(() => {
   return trends[PerformanceMetrics.FCP] ?? [];
@@ -94,7 +96,7 @@ const overviewMetrics = computed(() => {
           <Smartphone class="h-4 w-4 text-black-700" />
         </template>
         <BrowserStatsTitleBar />
-        <BrowserStats v-for="(stat, index) in mobileBrowserStats" v-bind="stat" :class="{
+        <BrowserStats v-for="(mobileStat, index) in mobileBrowserStats" v-bind="mobileStat" :class="{
           'border-t border-black-200': index !== 0,
         }" />
       </CardVue>
