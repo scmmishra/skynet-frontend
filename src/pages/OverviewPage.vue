@@ -1,64 +1,88 @@
 <script lang="ts" setup>
-import { formatDate } from '../utils/date';
+import { formatDate } from "../utils/date";
 import { PerformanceMetrics } from "../types/metrics";
-import StatCardVue from '../components/Stats/StatCard.vue';
-import CardVue from '../components/Base/Card.vue';
-import PaintMetricsChart from '../components/Stats/PaintMetricsChart.vue';
-import BrowserStats from '../components/Stats/BrowserStats.vue';
-import { Browsers } from '../types/browsers';
-import BrowserStatsTitleBar from '../components/Stats/BrowserStatsTitleBar.vue';
+import StatCardVue from "../components/Stats/StatCard.vue";
+import CardVue from "../components/Base/Card.vue";
+import PaintMetricsChart from "../components/Stats/PaintMetricsChart.vue";
+import BrowserStats from "../components/Stats/BrowserStats.vue";
+import { Browsers } from "../types/browsers";
+import BrowserStatsTitleBar from "../components/Stats/BrowserStatsTitleBar.vue";
 
-import { Smartphone, Monitor } from 'lucide-vue-next';
+import { Smartphone, Monitor } from "lucide-vue-next";
 
-import api from '../utils/api';
-import { computed } from 'vue';
-import { DistributionResponse } from '../types/api';
+import api from "../utils/api";
+import { computed } from "vue";
+import { DistributionResponse } from "../types/api";
 
-
-const allowedBrowserMetrics = [PerformanceMetrics.FCP, PerformanceMetrics.LCP, PerformanceMetrics.CLS];
+const allowedBrowserMetrics = [
+  PerformanceMetrics.FCP,
+  PerformanceMetrics.LCP,
+  PerformanceMetrics.CLS,
+];
+const metricsOrder = [
+  PerformanceMetrics.FCP,
+  PerformanceMetrics.LCP,
+  PerformanceMetrics.CLS,
+  PerformanceMetrics.TTFB,
+  PerformanceMetrics.TBT,
+  PerformanceMetrics.FID,
+  PerformanceMetrics.FP,
+];
 
 function marshallBrowserStats(stats: DistributionResponse) {
-  const keys = Object.keys(stats) as Browsers[]
+  const keys = Object.keys(stats) as Browsers[];
 
   return keys.map((key: Browsers) => {
     return {
       browser: key,
-      stats: mobileStats[key].filter((stat) => allowedBrowserMetrics.includes(stat.name))
-    }
-  })
+      stats: mobileStats[key]
+        .filter((stat) => allowedBrowserMetrics.includes(stat.name))
+        .sort(
+          (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
+        ),
+    };
+  });
 }
 
-const overview = await api.overview()
-const trends = await api.trend()
-const mobileStats = await api.mobileDistrubution()
-const desktopStats = await api.mobileDistrubution()
+const overview = await api.overview();
+const trends = await api.trend();
+const mobileStats = await api.mobileDistrubution();
+const desktopStats = await api.mobileDistrubution();
 
 const fcpTrends = computed(() => {
-  return trends[PerformanceMetrics.FCP] ?? []
-})
+  return trends[PerformanceMetrics.FCP] ?? [];
+});
 
 const lcpTrends = computed(() => {
-  return trends[PerformanceMetrics.LCP] ?? []
-})
+  return trends[PerformanceMetrics.LCP] ?? [];
+});
 
 const mobileBrowserStats = computed(() => {
-  return marshallBrowserStats(mobileStats)
+  return marshallBrowserStats(mobileStats);
 });
 
 const desktopBrowserStats = computed(() => {
-  return marshallBrowserStats(desktopStats)
+  return marshallBrowserStats(desktopStats);
 });
+
+const overviewMetrics = computed(() => {
+  return overview.metrics.sort(
+    (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
+  );
+})
 </script>
 
 <template>
   <main class="grid py-8 pr-4 space-y-6">
     <section class="ml-2 space-y-2">
-      <h1 class="font-normal text-[20px] leading-8 text-black-999">Welcome back, Vishnu</h1>
+      <h1 class="font-normal text-[20px] leading-8 text-black-999">
+        Welcome back, Vishnu
+      </h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <CardVue>
       <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 p-6">
-        <StatCardVue v-for="metric in overview.metrics" v-bind="metric" />
+        <StatCardVue v-for="metric in overviewMetrics" v-bind="metric" />
       </div>
     </CardVue>
     <CardVue title="Paint Metrics">
