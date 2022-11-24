@@ -27,7 +27,7 @@ const formattedChange = computed(() => {
 
 function computedTone(): BadgeTone {
   if (props.change) {
-    return props.change > 0 ? 'positive' : 'negative'
+    return props.change > 0 ? 'negative' : 'positive'
   }
 
   return 'neutral'

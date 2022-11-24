@@ -12,6 +12,7 @@ const metricValues = [
   {
     shortcode: PerformanceMetrics.LCP,
     value: 2050,
+    change: -2,
   },
   {
     shortcode: PerformanceMetrics.FP,
