@@ -5,6 +5,8 @@ specifiers:
   '@types/node': ^18.11.9
   '@vitejs/plugin-vue': ^3.2.0
   autoprefixer: ^10.4.13
+  dayjs: ^1.11.6
+  frappe-charts: 2.0.0-rc23
   lucide-vue-next: ^0.102.0
   postcss: ^8.4.19
   tailwindcss: ^3.2.4
@@ -17,6 +19,8 @@ specifiers:
 
 dependencies:
   '@heroicons/vue': 2.0.13_vue@3.2.45
+  dayjs: 1.11.6
+  frappe-charts: 2.0.0-rc23
   lucide-vue-next: 0.102.0_vue@3.2.45
   vue: 3.2.45
   vue-router: 4.1.6_vue@3.2.45
@@ -353,6 +357,10 @@ packages:
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
 
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
+    dev: false
+
   /de-indent/1.0.2:
     resolution: {integrity: sha512-e/1zu3xH5MQryN2zdVaF0OrdNLUbvWxzMbi+iNA6Bky7l1RoP8a2fIbRocyHclXt/arDrrR6lL3TqFD9pMQTsg==}
     dev: true
@@ -628,6 +636,10 @@ packages:
   /fraction.js/4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
     dev: true
+
+  /frappe-charts/2.0.0-rc23:
+    resolution: {integrity: sha512-TZ1VOdgCkeeQp8HFgbFIU1btWB3QjveEw6rxNolzaw0PKs4v+Oq4KVdYw6jCgPIii7kdWyRAyCsz9VKNcUB8wA==}
+    dev: false
 
   /fsevents/2.3.2:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}

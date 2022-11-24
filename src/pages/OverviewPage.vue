@@ -2,6 +2,8 @@
 import { formatDate } from '../utils/date';
 import { PerformanceMetrics } from "../types/metrics";
 import StatCardVue from '../components/Stats/StatCard.vue';
+import CardVue from '../components/Base/Card.vue';
+import PaintMetricsChart from '../components/Stats/PaintMetricsChart.vue';
 
 const metricValues = [
   {
@@ -43,8 +45,13 @@ const metricValues = [
       <h1 class="font-normal text-[20px] leading-8 text-black-999">Welcome back, Vishnu</h1>
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
-    <section class="grid w-full grid-cols-4 gap-8 p-6 bg-white rounded-2xl card">
-      <StatCardVue v-for="metric in metricValues" v-bind="metric" />
-    </section>
+    <CardVue>
+      <div class="grid grid-cols-4 gap-8">
+        <StatCardVue v-for="metric in metricValues" v-bind="metric" />
+      </div>
+    </CardVue>
+    <CardVue title="Paint Metrics">
+      <PaintMetricsChart></PaintMetricsChart>
+    </CardVue>
   </main>
 </template>
