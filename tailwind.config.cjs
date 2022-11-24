@@ -6,6 +6,9 @@ module.exports = {
       sans: ["Inter", "sans-serif"],
     },
     extend: {
+      gridTemplateColumns: {
+        "metrics-row": "200px minmax(900px, 1fr) 100px",
+      },
       colors: {
         black: {
           100: "#F3F3F5",
