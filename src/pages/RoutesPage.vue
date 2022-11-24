@@ -31,6 +31,7 @@ const metrics = computed(() => {
       return {
         ...METRICS[key],
         stats: routeMetrics[key],
+        statsMax: Math.max(...routeMetrics[key].map((m) => Number(m.value))),
       };
     });
 });
@@ -54,16 +55,22 @@ const metrics = computed(() => {
         </div>
         <div
           v-for="(stat, index) in metric.stats"
-          class="grid grid-cols-2 px-6 py-1 hover:bg-black-100/50 pre-bar"
+          class="flex px-6 py-1 hover:bg-black-100/50 justify-between"
           :class="{
             'border-t border-black-200': index !== 0,
           }"
         >
-          <div class="flex items-center text-sm text-black-700">
-            {{ stat.route }}
+          <div class="flex items-center text-sm text-black-700 flex-grow">
+            <div
+              class="rounded px-2 py-1 -ml-2 bg-opacity-10"
+              :class="computedScore(metric.name, stat.value)"
+              :style="{ width: `${(stat.value / metric.statsMax) * 100}%` }"
+            >
+              {{ stat.route }}
+            </div>
           </div>
           <div
-            class="text-black-700 inline-flex text-right items-center gap-2 justify-end px-2 py-1 rounded-md tabular-nums"
+            class="text-black-700 inline-flex text-right items-center gap-2 justify-end px-2 py-1 rounded-md tabular-nums w-24"
           >
             <div
               v-if="computedScore(metric.name, stat.value)"
