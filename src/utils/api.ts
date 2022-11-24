@@ -2,7 +2,7 @@ import {
   DistributionResponse,
   OverviewResponse,
   TrendResponse,
-} from "../types/api/overview";
+} from "../types/api";
 import { get } from "./request";
 
 class API {

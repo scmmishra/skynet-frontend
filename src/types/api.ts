@@ -1,5 +1,5 @@
-import { Browsers } from "../browsers";
-import { PerformanceMetrics } from "../metrics";
+import { Browsers } from "./browsers";
+import { PerformanceMetrics } from "./metrics";
 
 export type MetricData = {
   name: PerformanceMetrics;
