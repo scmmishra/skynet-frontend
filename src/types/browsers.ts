@@ -9,7 +9,7 @@ export enum Browsers {
 }
 
 export type BrowserMetaData = {
-  name: Browsers;
+  shortcode: Browsers;
   name: string;
   image: string;
 };
