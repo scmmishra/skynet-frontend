@@ -16,7 +16,7 @@ let svgMap = ref("");
 setIntervalAsync(async () => {
   countryStats = await api.heatmap();
   svgMap.value = buildMap();
-}, 5000);
+}, 3000);
 
 const sortedMetrics = Object.values(METRICS).sort(
   (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
