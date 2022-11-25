@@ -36,16 +36,15 @@ function marshallBrowserStats(stats: DistributionResponse) {
 
 let overview = ref(await api.overview());
 let trends = ref(await api.trend());
+let mobileStats = ref(await api.mobileDistrubution());
+let desktopStats = ref(await api.desktopDistrubution());
 
 setIntervalAsync(async () => {
   overview.value = await api.overview();
   trends.value = await api.trend();
-}, 2000);
-
-const [mobileStats, desktopStats] = await Promise.all([
-  api.mobileDistrubution(),
-  api.desktopDistrubution(),
-]);
+  mobileStats.value = await api.mobileDistrubution();
+  desktopStats.value = await api.desktopDistrubution();
+}, 3000);
 
 const fcpTrends = computed(() => {
   return trends.value[PerformanceMetrics.FCP] ?? [];
@@ -56,11 +55,11 @@ const lcpTrends = computed(() => {
 });
 
 const mobileBrowserStats = computed(() => {
-  return marshallBrowserStats(mobileStats);
+  return marshallBrowserStats(mobileStats.value);
 });
 
 const desktopBrowserStats = computed(() => {
-  return marshallBrowserStats(desktopStats);
+  return marshallBrowserStats(desktopStats.value);
 });
 
 const overviewMetrics = computed(() => {
