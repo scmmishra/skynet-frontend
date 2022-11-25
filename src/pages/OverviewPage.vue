@@ -15,8 +15,9 @@ import BrowserStatsTitleBar from "../components/Stats/BrowserStatsTitleBar.vue";
 import { Smartphone, Monitor } from "lucide-vue-next";
 
 import api from "../utils/api";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { DistributionResponse } from "../types/api";
+import { setIntervalAsync } from "../utils/request";
 
 function marshallBrowserStats(stats: DistributionResponse) {
   const keys = Object.keys(stats) as Browsers[];
@@ -33,8 +34,13 @@ function marshallBrowserStats(stats: DistributionResponse) {
   });
 }
 
-const [overview, trends, mobileStats, desktopStats] = await Promise.all([
-  api.overview(),
+let overview = ref(await api.overview());
+
+setIntervalAsync(async () => {
+  overview.value = await api.overview();
+}, 2000);
+
+const [trends, mobileStats, desktopStats] = await Promise.all([
   api.trend(),
   api.mobileDistrubution(),
   api.desktopDistrubution(),
@@ -57,7 +63,7 @@ const desktopBrowserStats = computed(() => {
 });
 
 const overviewMetrics = computed(() => {
-  return overview.metrics.sort(
+  return overview.value.metrics.sort(
     (a, b) => metricsOrder.indexOf(a.name) - metricsOrder.indexOf(b.name)
   );
 });

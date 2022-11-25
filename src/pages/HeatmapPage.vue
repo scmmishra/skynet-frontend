@@ -8,15 +8,10 @@ import { metricsOrder, PerformanceMetrics } from "../types/metrics";
 import METRICS, { metricStatus } from "../utils/metrics";
 import SidebarItem from "../components/Sidebar/SidebarItem.vue";
 import { onMounted, ref, Ref } from "vue";
+import { setIntervalAsync } from "../utils/request";
 
 let countryStats = await api.heatmap();
 let svgMap = ref("");
-
-const setIntervalAsync = (fn: () => Promise<void>, ms: number) => {
-  fn().then(() => {
-    setTimeout(() => setIntervalAsync(fn, ms), ms);
-  });
-};
 
 setIntervalAsync(async () => {
   countryStats = await api.heatmap();

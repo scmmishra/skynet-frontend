@@ -36,3 +36,9 @@ export async function get<T>(path: string, config?: RequestInit): Promise<T> {
   const init = { method: "GET", ...config };
   return await http<T>(path, init);
 }
+
+export const setIntervalAsync = (fn: () => Promise<void>, ms: number) => {
+  fn().then(() => {
+    setTimeout(() => setIntervalAsync(fn, ms), ms);
+  });
+};
