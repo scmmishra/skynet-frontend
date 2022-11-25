@@ -5,16 +5,45 @@ import DottedMap from "dotted-map";
 import mapJson from "../utils/map";
 import api from "../utils/api";
 import { metricsOrder, PerformanceMetrics } from "../types/metrics";
-import METRICS, { metricStatus } from "../utils/metrics";
+import METRICS, { formatUnit, metricStatus } from "../utils/metrics";
 import SidebarItem from "../components/Sidebar/SidebarItem.vue";
 import { onMounted, ref, Ref } from "vue";
 import { setIntervalAsync } from "../utils/request";
 
-let countryStats = await api.heatmap();
+import CountryFlag from "vue-country-flag-next";
+import data from "../content/data";
+const testData = Object.values(data).flat();
+
+const geoDataMapped: Record<
+  string,
+  {
+    values: {
+      name: PerformanceMetrics;
+      value: number;
+    }[];
+    country: string;
+  }
+> = {};
+
+testData.forEach((point) => {
+  if (!geoDataMapped[point.country_code]) {
+    geoDataMapped[point.country_code] = {
+      values: [],
+      country: point.country,
+    };
+  }
+
+  geoDataMapped[point.country_code].values.push({
+    name: point.metric,
+    value: point.value,
+  });
+});
+
+let countryStats = ref(await api.heatmap());
 let svgMap = ref("");
 
 setIntervalAsync(async () => {
-  countryStats = await api.heatmap();
+  countryStats.value = await api.heatmap();
   svgMap.value = buildMap();
 }, 3000);
 
@@ -32,6 +61,8 @@ function getColor(name: PerformanceMetrics, value: number) {
   if (status === "warning") return "#ff921b";
 }
 
+const metricsLabel = ["FCP", "LCP", "CLS", "TTFB", "TBT", "FID", "FP"];
+
 function buildMap() {
   const map = new DottedMap({
     // @ts-ignore
@@ -40,7 +71,7 @@ function buildMap() {
     grid: "diagonal",
   });
 
-  const dataSource = countryStats[selectedMetric.value];
+  const dataSource = countryStats.value[selectedMetric.value];
 
   dataSource.forEach((item) => {
     map.addPin({
@@ -65,6 +96,44 @@ onMounted(() => {
   svgMap.value = buildMap();
 });
 
+function getval(
+  metric: PerformanceMetrics,
+  stat: {
+    name: PerformanceMetrics;
+    value: number;
+  }[]
+) {
+  return stat.filter((v) => v.name === metric)[0].value;
+}
+
+function computedScore(name: PerformanceMetrics, value: number) {
+  const status = metricStatus(name, value);
+
+  if (status === "negative") {
+    return "bg-red-500";
+  }
+
+  if (status === "warning") {
+    return "bg-orange-500";
+  }
+
+  if (status === "positive") {
+    return "bg-green-500";
+  }
+}
+
+function textColor(name: PerformanceMetrics, value: number) {
+  const status = metricStatus(name, value);
+
+  if (status === "negative") {
+    return "font-medium";
+  }
+
+  if (status === "warning") {
+    return "font-medium";
+  }
+}
+
 function toggleMetric(metric: PerformanceMetrics) {
   selectedMetric.value = metric;
   svgMap.value = buildMap();
@@ -80,7 +149,7 @@ function toggleMetric(metric: PerformanceMetrics) {
       <time class="text-sm text-black-600">{{ formatDate() }}</time>
     </section>
     <Card class="p-6">
-      <div class="grid grid-cols-5 gap-8">
+      <div class="grid grid-cols-4 xl:grid-cols-5 gap-8">
         <div class="col-span-1 space-y-2">
           <SidebarItem
             v-for="metric in sortedMetrics"
@@ -90,7 +159,46 @@ function toggleMetric(metric: PerformanceMetrics) {
             @click="toggleMetric(metric.name)"
           ></SidebarItem>
         </div>
-        <div class="col-span-4" v-html="svgMap"></div>
+        <div class="col-span-3 xl:grid-cols-4" v-html="svgMap"></div>
+      </div>
+    </Card>
+
+    <Card title="Distribution">
+      <div class="gap-6 pb-6">
+        <div class="grid grid-cols-9 gap-4 px-6 pb-2">
+          <span class="col-span-2 card-title"></span>
+          <span
+            class="col-span card-title text-right"
+            v-for="name in metricsLabel"
+            >{{ name }}</span
+          >
+        </div>
+        <div
+          v-for="(stat, country) in geoDataMapped"
+          class="grid grid-cols-9 gap-4 px-6 pb-3"
+        >
+          <div class="flex items-center gap-3 col-span-2">
+            <CountryFlag
+              :country="country"
+              class="rounded shadow-md border-black-100"
+            ></CountryFlag>
+            <div class="mt-[10px] text-black-700 text-sm">
+              {{ stat.country }}
+            </div>
+          </div>
+          <div
+            v-for="metric in metricsOrder"
+            class="text-xs mt-[13px] text-right tabular-nums inline-flex gap-2 justify-end"
+            :class="textColor(metric, getval(metric, stat.values))"
+          >
+            <div
+              v-if="computedScore(metric, getval(metric, stat.values))"
+              :class="computedScore(metric, getval(metric, stat.values))"
+              class="w-1.5 h-1.5 rounded-full mt-[5px]"
+            />
+            {{ formatUnit(metric, getval(metric, stat.values)) }}
+          </div>
+        </div>
       </div>
     </Card>
   </main>
